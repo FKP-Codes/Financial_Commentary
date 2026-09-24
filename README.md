@@ -4,14 +4,14 @@
 
 **Du reporting chiffré au commentaire de gestion rédigé, en un clic.**
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://VOTRE-APP.streamlit.app)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ai-portfolio-commentary.streamlit.app)
 ![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)
 ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white)
 ![Claude API](https://img.shields.io/badge/LLM-Claude%20Haiku%204.5-D97757)
 [![CI](https://github.com/FKP-Codes/Financial_Commentary/actions/workflows/ci.yml/badge.svg)](https://github.com/FKP-Codes/Financial_Commentary/actions)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-[**▶ Démo en ligne**](https://VOTRE-APP.streamlit.app) · [Cas d'usage](#-cas-dusage-métier) · [Architecture](#-architecture) · [Lancer en local](#-lancer-en-local)
+[**▶ Démo en ligne**](https://ai-portfolio-commentary.streamlit.app) · [Cas d'usage](#-cas-dusage-métier) · [Architecture](#-architecture) · [Lancer en local](#-lancer-en-local)
 
 <img src="docs/screenshot.png" alt="Capture de l'application" width="850">
 
