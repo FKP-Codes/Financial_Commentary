@@ -228,10 +228,14 @@ export default {
       }),
     });
     if (!upstream.ok || !upstream.body) {
-      // Error type only (e.g. authentication_error): never echoes the key or the request.
-      let detail = "";
-      try { detail = (await upstream.json())?.error?.type || ""; } catch { /* non-JSON body */ }
-      return json(502, { error: "upstream_error", status: upstream.status, detail }, cors);
+      // Claude API error type and message (e.g. low credit balance): they never contain the key.
+      let detail = "", message = "";
+      try {
+        const err = (await upstream.json())?.error || {};
+        detail = err.type || "";
+        message = String(err.message || "").slice(0, 200);
+      } catch { /* non-JSON body */ }
+      return json(502, { error: "upstream_error", status: upstream.status, detail, message }, cors);
     }
     return new Response(sseToText(upstream.body), {
       headers: { ...cors, "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-store", "X-Remaining": String(quota.remaining) },
