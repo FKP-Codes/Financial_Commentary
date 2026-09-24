@@ -228,7 +228,10 @@ export default {
       }),
     });
     if (!upstream.ok || !upstream.body) {
-      return json(502, { error: "upstream_error", status: upstream.status }, cors);
+      // Error type only (e.g. authentication_error): never echoes the key or the request.
+      let detail = "";
+      try { detail = (await upstream.json())?.error?.type || ""; } catch { /* non-JSON body */ }
+      return json(502, { error: "upstream_error", status: upstream.status, detail }, cors);
     }
     return new Response(sseToText(upstream.body), {
       headers: { ...cors, "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-store", "X-Remaining": String(quota.remaining) },
