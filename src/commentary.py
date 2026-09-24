@@ -92,7 +92,6 @@ def stream_commentary(api_key: str, model: str, user_prompt: str) -> Iterator[st
     with client.messages.stream(
         model=model,
         max_tokens=1500,
-        temperature=0.3,
         system=SYSTEM_PROMPT,
         messages=[{"role": "user", "content": user_prompt}],
     ) as stream:
