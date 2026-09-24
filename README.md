@@ -67,20 +67,26 @@ Cette application montre comment un LLM peut produire un **premier jet** que le 
 ## 🏗 Architecture
 
 ```
-portfolio-commentary-generator/
+Financial_Commentary/
 ├── app.py                  # Interface Streamlit (dashboard + génération)
 ├── src/
 │   ├── config.py           # Univers d'investissement, allocations, modèle
 │   ├── data.py             # Récupération et nettoyage des prix (yfinance)
 │   ├── metrics.py          # Indicateurs de performance/risque (fonctions pures)
 │   └── commentary.py       # Prompt système, payload JSON, appel Claude en streaming
-├── tests/test_metrics.py   # Tests unitaires (pytest)
+├── tests/                  # Tests unitaires (pytest)
 ├── scripts/refresh_sample.py  # Snapshot CSV de secours si Yahoo est indisponible
+├── data/sample_prices.csv  # Snapshot de données publiques
+├── proxy/worker.js         # Proxy Cloudflare : génération depuis le site GitHub Pages
+├── wrangler.jsonc          # Configuration de déploiement du proxy
 ├── .streamlit/config.toml  # Thème
 ├── .github/workflows/ci.yml   # Lint (ruff) + tests à chaque push
 ├── requirements.txt
 └── .env.example
 ```
+
+Le commentaire peut aussi être généré depuis le [site portfolio](https://fkp-codes.github.io/FKP-Codes/#projects/ai-commentary/demo),
+via le proxy décrit dans [`proxy/README.md`](proxy/README.md).
 
 ```mermaid
 flowchart LR
@@ -134,8 +140,7 @@ python scripts/refresh_sample.py   # crée data/sample_prices.csv, à committer
    ANTHROPIC_API_KEY = "sk-ant-..."
    CLAUDE_MODEL = "claude-haiku-4-5"
    ```
-5. Choisissez une URL personnalisée (ex. `commentaire-gestion-ia.streamlit.app`) → **Deploy**.
-6. Mettez à jour le lien du badge et de la démo en haut de ce README.
+5. Choisissez une URL personnalisée → **Deploy**.
 
 > 💡 Fixez une **limite de dépenses mensuelle** sur la console Anthropic pour la clé utilisée par la démo publique.
 

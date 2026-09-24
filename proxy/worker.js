@@ -80,7 +80,7 @@ function metrics(obj, where) {
 }
 
 /** Rebuilds the payload from numbers only, so no free text reaches the prompt through it. */
-export function sanitizePayload(p) {
+function sanitizePayload(p) {
   if (!p || typeof p !== "object") throw new BadRequest("missing payload");
   if (!Array.isArray(p.lignes) || p.lignes.length !== ASSETS.length) throw new BadRequest("invalid lignes");
   const monthly = p.performances_mensuelles_portefeuille || {};
@@ -107,7 +107,7 @@ export function sanitizePayload(p) {
 }
 
 /** Same shape as build_user_prompt() in src/commentary.py. */
-export function buildUserPrompt(context, audience, length, lang, notes) {
+function buildUserPrompt(context, audience, length, lang, notes) {
   const n = notes.trim() || "Aucun contexte fourni : ne pas attribuer de causes externes aux mouvements.";
   return (
     `Public cible : ${AUDIENCE_GUIDE[audience]}\n` +
@@ -119,7 +119,7 @@ export function buildUserPrompt(context, audience, length, lang, notes) {
   );
 }
 
-export function parseRequest(body) {
+function parseRequest(body) {
   const audience = body?.audience, length = body?.length, lang = body?.lang;
   if (!(audience in AUDIENCE_GUIDE)) throw new BadRequest("invalid audience");
   if (!(length in LENGTH_GUIDE)) throw new BadRequest("invalid length");
@@ -228,14 +228,14 @@ export default {
       }),
     });
     if (!upstream.ok || !upstream.body) {
-      // Claude API error type and message (e.g. low credit balance): they never contain the key.
-      let detail = "", message = "";
+      // Full error goes to the Cloudflare logs; visitors only get the status and error type.
+      let detail = "";
       try {
         const err = (await upstream.json())?.error || {};
         detail = err.type || "";
-        message = String(err.message || "").slice(0, 200);
+        console.error("Claude API error", upstream.status, detail, err.message || "");
       } catch { /* non-JSON body */ }
-      return json(502, { error: "upstream_error", status: upstream.status, detail, message }, cors);
+      return json(502, { error: "upstream_error", status: upstream.status, detail }, cors);
     }
     return new Response(sseToText(upstream.body), {
       headers: { ...cors, "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-store", "X-Remaining": String(quota.remaining) },

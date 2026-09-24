@@ -25,18 +25,18 @@ Le fichier `wrangler.jsonc` à la racine du dépôt décrit le Worker (`financia
 repository**), chaque push sur `main` le redéploie automatiquement. Seul le secret `ANTHROPIC_API_KEY` est à
 renseigner dans **Settings → Variables and Secrets** (type **Secret**) ; il n'est pas écrasé par les déploiements.
 
-## Déploiement manuel (≈ 10 minutes, offre gratuite)
+## Déploiement manuel (sans lien GitHub)
 
-1. Créez un compte sur [dash.cloudflare.com](https://dash.cloudflare.com) (gratuit).
-2. **Workers & Pages → Create → Create Worker** → nommez-le `commentary-proxy` → **Deploy**.
-3. **Edit code** → remplacez tout le contenu par celui de `worker.js` → **Deploy**.
-4. **Settings → Variables and Secrets** :
-   - `ANTHROPIC_API_KEY` → type **Secret** → votre clé (idéalement une clé dédiée au site) ;
-   - `ALLOWED_ORIGINS` → type **Text** → `https://fkp-codes.github.io` ;
-   - optionnel : `CLAUDE_MODEL` (défaut `claude-haiku-4-5`), `HOURLY_LIMIT_PER_IP` (défaut `5`).
-5. Optionnel, plafond global : **Storage & Databases → KV → Create** (`commentary-usage`), puis dans le Worker
-   **Settings → Bindings → Add → KV namespace**, nom de variable `USAGE`, et une variable `DAILY_LIMIT` (ex. `100`).
-6. Copiez l'URL du Worker (`https://commentary-proxy.<compte>.workers.dev`) et renseignez-la dans
-   `assets/js/site.js` du dépôt FKP-Codes (`COMMENTARY_PROXY_URL`).
+1. Sur [dash.cloudflare.com](https://dash.cloudflare.com) : **Workers & Pages → Create → Create Worker**, nommé
+   `financial-commentary`, puis **Edit code** → collez `worker.js` → **Deploy**.
+2. **Settings → Variables and Secrets** : `ANTHROPIC_API_KEY` (type **Secret**) et `ALLOWED_ORIGINS`
+   (`https://fkp-codes.github.io`).
+
+## Options
+
+- `CLAUDE_MODEL` (défaut `claude-haiku-4-5`) et `HOURLY_LIMIT_PER_IP` (défaut `5`), en variables.
+- Plafond quotidien global : créez un espace KV, liez-le au Worker sous le nom `USAGE` et ajoutez `DAILY_LIMIT`.
+- Diagnostic : les erreurs de l'API Claude sont journalisées dans **Workers → financial-commentary → Logs** ; le
+  site n'affiche que leur type.
 
 Le Worker ne contient aucun secret : son code peut rester public.
