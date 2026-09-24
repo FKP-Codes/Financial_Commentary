@@ -18,7 +18,14 @@ Navigateur (chiffres calculés) ──► Worker (clé API secrète, prompt côt
 - **Débit** : 5 générations par heure et par IP (au mieux, par instance), plafond quotidien global optionnel via KV.
 - **Coût** : Claude Haiku 4.5, `max_tokens` = 1500, et limite de dépenses mensuelle sur la console Anthropic.
 
-## Déploiement (≈ 10 minutes, offre gratuite)
+## Déploiement depuis GitHub (recommandé)
+
+Le fichier `wrangler.jsonc` à la racine du dépôt décrit le Worker (`financial-commentary`, point d'entrée
+`proxy/worker.js`, origine autorisée). Si le Worker est relié au dépôt (**Workers & Pages → Create → Import a
+repository**), chaque push sur `main` le redéploie automatiquement. Seul le secret `ANTHROPIC_API_KEY` est à
+renseigner dans **Settings → Variables and Secrets** (type **Secret**) ; il n'est pas écrasé par les déploiements.
+
+## Déploiement manuel (≈ 10 minutes, offre gratuite)
 
 1. Créez un compte sur [dash.cloudflare.com](https://dash.cloudflare.com) (gratuit).
 2. **Workers & Pages → Create → Create Worker** → nommez-le `commentary-proxy` → **Deploy**.

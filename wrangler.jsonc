@@ -1,0 +1,13 @@
+// Cloudflare Worker that proxies commentary generation for the portfolio site (see proxy/README.md).
+// The API key is NOT here: it is stored as the ANTHROPIC_API_KEY secret in the Cloudflare dashboard.
+{
+  "name": "financial-commentary",
+  "main": "proxy/worker.js",
+  "compatibility_date": "2026-09-01",
+  "workers_dev": true,
+  // Keep variables set in the dashboard (e.g. HOURLY_LIMIT_PER_IP) across deployments.
+  "keep_vars": true,
+  "vars": {
+    "ALLOWED_ORIGINS": "https://fkp-codes.github.io"
+  }
+}
