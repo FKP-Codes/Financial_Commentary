@@ -22,12 +22,13 @@ Règles impératives :
   et par la contribution de chaque ligne.
 - Ne donne aucune recommandation d'investissement personnalisée ni promesse de performance future.
 - N'utilise ni emojis ni formules marketing.
+- N'utilise pas de tiret cadratin : préfère un tiret simple (-) ou une ponctuation classique.
 
 Structure attendue (titres en gras Markdown, sans titre général) :
-**Environnement de marché** — ce que les données disent de chaque classe d'actifs.
-**Performance du portefeuille** — performance absolue et relative, volatilité, drawdown, Sharpe.
-**Analyse des contributions** — lignes moteurs et détractrices, effet des écarts d'allocation.
-**Positionnement et perspectives** — allocation actuelle (après dérive), points de vigilance, sans prédiction chiffrée.
+**Environnement de marché** - ce que les données disent de chaque classe d'actifs.
+**Performance du portefeuille** - performance absolue et relative, volatilité, drawdown, Sharpe.
+**Analyse des contributions** - lignes moteurs et détractrices, effet des écarts d'allocation.
+**Positionnement et perspectives** - allocation actuelle (après dérive), points de vigilance, sans prédiction chiffrée.
 """
 
 LENGTH_GUIDE = {

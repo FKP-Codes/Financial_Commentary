@@ -1,4 +1,4 @@
-"""Générateur de commentaires de gestion IA — application Streamlit."""
+"""Générateur de commentaires de gestion IA - application Streamlit."""
 
 from __future__ import annotations
 
@@ -287,7 +287,7 @@ if using_demo_key and api_key:
 if st.session_state.get("commentary"):
     st.download_button(
         "Télécharger (.md)",
-        f"# Commentaire de gestion — {period_label}\n\n{st.session_state.commentary}\n",
+        f"# Commentaire de gestion - {period_label}\n\n{st.session_state.commentary}\n",
         file_name=f"commentaire_gestion_{prices.index[-1]:%Y%m%d}.md",
         mime="text/markdown",
     )
