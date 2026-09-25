@@ -157,6 +157,6 @@ python scripts/refresh_sample.py   # crée data/sample_prices.csv, à committer
 
 <div align="center">
 
-Réalisé par **[FKP-Codes](https://github.com/FKP-Codes)** · Financial Engineer | Building AI tools for Asset Management
+Réalisé par **[FKP-Codes](https://github.com/FKP-Codes)** · Financial Engineer | Building AI tools for Investment Management
 
 </div>
